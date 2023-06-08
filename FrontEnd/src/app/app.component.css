@@ -1,0 +1,90 @@
+.container {
+    margin-top: 30px;
+  }
+  
+  .row {
+    margin: 20px 0;
+  }
+  
+  section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+
+  .temp{
+    display: flex;
+    justify-content: space-around;
+  }
+  .col1{
+    margin: 50px
+  }
+
+  .table{
+    border: 2px solid;
+  }
+
+  /* 
+
+  .color-box:hover::after {
+    content: attr(data-color);
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+  } */
+
+
+  .color-box{
+    width: 80px;
+    height: 20px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  .DropDown{
+    width: 165px;
+  }
+
+  .mat-icon{
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .mdc-button__label{
+    margin-left: 20px;
+  }
+
