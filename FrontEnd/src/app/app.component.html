@@ -1,75 +1,111 @@
-<div class="col1">
-  <h1>Student Details</h1>
-  <div class="table-responsive">
-     <table class="table table-hover">
-        <tr>
-           <td>StudentId</td>
-           <td>Name</td>
-           <td>RollNo</td>
-           <td>Mark</td>
-           <td>Course</td>
-           <td>City</td>
-           <td>Color Name</td>
-           <td>Action</td>
-        </tr>
-
-        <tr *ngFor="let student of loadedPosts; index as i">
-           <td>{{student.studentId}}</td>
-           <td>{{student.name}}</td>
-           <td>{{student.rollNo}}</td>
-           <td>{{student.mark | number:'1.1-2'}}</td>
-           <td>{{student.course}}</td>
-           <td>{{student.city}}</td>
-           <td>
-              <div class="color-box" [style.background-color]="student.color" matTooltip="{{ student.color }}">
-              </div>
-           </td>
-           <td>
-            
-              <mat-icon  mat-raised-button color="primary" (click)="onUpdate(student.studentId, i)"> border_color</mat-icon>
-            <mat-icon mat-raised-button color="warn" (click)="onDelete(student.studentId)">delete</mat-icon>
-              
+<!--    
+   <div class="col1">
+      <h1>Student Details</h1>
+      <div class="table-responsive">
+         <table class="table table-hover">
+            <tr>
+               <td>StudentId</td>
+               <td>Name</td>
+               <td>RollNo</td>
+               <td>Mark</td>
+               <td>Course</td>
+               <td>City</td>
+               <td>Color Name</td>
+               
+               <td>Action</td>
+               <td>Country</td>
+               <td>state</td>
+            </tr>
+    
+            <tr *ngFor="let student of loadedPosts;  index as i">
+               <td>{{student.studentId}}</td>
+               <td>{{student.name}}</td>
+               <td>{{student.rollNo}}</td>
+               <td>{{student.mark | number:'1.1-2'}}</td>
+               <td>{{student.course}}</td>
+               <td>{{student.city}}</td>
+               
+               <td>
+                  <div class="color-box" [style.background-color]="student.color" matTooltip="{{ student.color }}">
+                  </div>
+               </td>
+               <td>
+                
+                  <mat-icon  mat-raised-button color="primary" (click)="onUpdate(student.studentId, i)"> border_color</mat-icon>
+                <mat-icon mat-raised-button color="warn" (click)="onDelete(student.studentId)">delete</mat-icon>
+                  
+                 
+                </td>
+                <td>{{student.countryName}}</td>
+                <td>{{student.stateName}}</td>
+            </tr>
+         </table>
+      </div>
+    
+      <div class="temp">
+         <div>
+            <h1>{{ editMode ? 'Update Student' : 'Add Student' }}</h1>
+    
+            <form #f="ngForm">
+               <label>Name : </label>
+               <input type="text" name="name" placeholder="Name" [(ngModel)]="name" required />
+               <br>
+               <label>Name : </label>
+               <input type="text" name="name" placeholder="Name" [(ngModel)]="name" required />
+               <br>
+               <label>Roll no : </label>
+               <input type="text" name="rollNo" placeholder="RollNo" [(ngModel)]="rollNo" required />
+               <br>
+               <label>Marks : </label>
+               <input type="text" name="mark" placeholder="Marks" [(ngModel)]="mark" required>
+               <br>
+               <label>Course : </label>
+               <input type="text" name="course" placeholder="Course" [(ngModel)]="course" required>
+               <br>
+               <label>City : </label>
+               <input type="text" name="city" placeholder="City" [(ngModel)]="city" required>
+               <br>
+               <label>Color : </label>
+               <input type="color" name="color" [(ngModel)]="color" required>
+               <br>
              
-            </td>
-
-        </tr>
-     </table>
-  </div>
-
-  <div class="temp">
-     <div>
-        <h1>{{ editMode ? 'Update Student' : 'Add Student' }}</h1>
-
-        <form #f="ngForm">
-           <label>Name : </label>
-           <input type="text" name="name" placeholder="Name" [(ngModel)]="name" required />
-           <br>
-           <label>Roll no : </label>
-           <input type="text" name="rollNo" placeholder="RollNo" [(ngModel)]="rollNo" required />
-           <br>
-           <label>Marks : </label>
-           <input type="text" name="mark" placeholder="Marks" [(ngModel)]="mark" required>
-           <br>
-           <label>Course : </label>
-           <input type="text" name="course" placeholder="Course" [(ngModel)]="course" required>
-           <br>
-           <label>City : </label>
-           <input type="text" name="city" placeholder="City" [(ngModel)]="city" required>
-           <br>
-           <label>Color : </label>
-           <input type="color" name="color" [(ngModel)]="color" required>
-           <br>
-
-           <button mat-raised-button color="primary" type="submit" (click)="editMode ? onUpdatePost() : onCreatePost(name, rollNo, mark, course, city, color)">
-              {{ editMode ? 'Update Student' : 'Add Student' }}
+               
+                 <label>Country:</label>
+            
+               
+              <select #selectCountry [(ngModel)]="selectedCountryId" name="country" (change)="onCountryChange(selectCountry.selectedIndex)">
+                <option *ngFor="let country of countries; index as countryIndex" [ngValue]="country.countryId" >
+                  {{ country.countryName }}
+                   </option>
+              </select>
+    
+               
+              <br> 
+              <label>State:</label>
+            <select #selectstate [(ngModel)]="selectedStateId" name="state">
+              <option *ngFor="let state of filteredStates" [ngValue]="state.stateId">{{ state.stateName }}</option>
+            </select><br>
+           
               
-           </button>
-        
-          <button class="Cancle" mat-raised-button color="warn" *ngIf="editMode" type="submit" (click)="editMode ? Cancle() :  temp() ">
-            Cancle
-          </button>
-          
-        </form>
-     </div>
-  </div>
-</div>
+    
+               <button mat-raised-button color="primary" type="submit" 
+                 (click)="editMode ? onUpdatePost() : 
+                 onCreatePost(name, rollNo, mark, course, city, color,selectedCountryId,selectedStateId)">
+                  {{ editMode ? 'Update Student' : 'Add Student' }}
+                  
+               </button>
+            
+              <button class="Cancle" mat-raised-button color="warn" *ngIf="editMode" type="submit" (click)="editMode ? Cancle() :  temp() ">
+                Cancel
+              </button>
+              
+            </form>
+         </div>
+      </div>
+    </div> -->
+  
+    <router-outlet></router-outlet>
+    <lib-toastify-toast-container></lib-toastify-toast-container>
+  
+  
+    

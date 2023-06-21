@@ -1,4 +1,6 @@
-/* .container {
+
+
+.container {
     margin-top: 30px;
   }
   
@@ -48,7 +50,7 @@
 
   .table{
     border: 2px solid;
-  } */
+  }
 
   /* 
 
@@ -66,7 +68,7 @@
   } */
 
 
-  /* .color-box{
+  .color-box{
     width: 80px;
     height: 20px;
     border-radius: 3px;
@@ -86,5 +88,14 @@
 
   .mdc-button__label{
     margin-left: 20px;
-  } */
+  }
 
+  .col2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.Delete{
+  width: 100px;
+  
+} 
